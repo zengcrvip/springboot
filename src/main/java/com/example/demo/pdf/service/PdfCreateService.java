@@ -12,5 +12,5 @@ public interface PdfCreateService {
 
      void createVoucher(Map map, String tempPath, String basePath) throws Exception;
 
-     int createBatchDetailVoucher(List<Map> details, String tempPath, String basePath, String  appCode) throws Exception;
+     int createBatchDetailVoucher(List<Map> details, String tempPath, String basePath, String  appCode, int nextPageIndex) throws Exception;
 }

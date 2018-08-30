@@ -1,11 +1,14 @@
 package com.example.demo.pdf.service.impl;
 
 import com.example.demo.pdf.model.PdfTaskResult;
+import com.example.demo.pdf.service.PdfCreateService;
 import com.example.demo.pdf.service.PdfManageService;
 import com.example.demo.pdf.task.AbstractPdfTask;
+import com.example.demo.pdf.task.PdfTask;
 import com.example.demo.util.DateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -35,6 +38,9 @@ public class PdfManageServiceImpl implements PdfManageService {
      */
     private CompletionService<PdfTaskResult> workPool = null;
 
+    @Autowired
+    private PdfCreateService pdfCreateService;
+
     private String baseDir = "D:/baseDir";
     private String zipDir = "D:/zipDir";
     private String tempDir = "D:/baseDir";
@@ -53,7 +59,7 @@ public class PdfManageServiceImpl implements PdfManageService {
                     while (true) {
                         // 阻塞等待
                         result = workPool.take().get();
-                        //结果处理 TODO
+                        //结果处理  TODO
 //                        processVoucherTaskResult(result);
                     }
                 } catch (InterruptedException e) {
@@ -91,10 +97,9 @@ public class PdfManageServiceImpl implements PdfManageService {
         initUserDir(appCode, orderDate);
         String basePath = generatePath(appCode, orderDate, baseDir);
         String tempPath = generatePath(appCode, orderDate, tempDir);
-        AbstractPdfTask task = null;
-
-
-
+        AbstractPdfTask task = new PdfTask(appCode,date,basePath,tempPath,pdfCreateService);
+        workPool.submit(task);
+        registTask(taskKey, task);
     }
 
     private AbstractPdfTask getTask(String taskKey) {
@@ -142,5 +147,15 @@ public class PdfManageServiceImpl implements PdfManageService {
             logger.error("create dir occurs error ", e);
             return;
         }
+    }
+
+    /**
+     * 注册一个任务到任务表，防止重复提交一样的任务，造成CPU栈溢出 taskKey的格式为 appCode+orderDate
+     * value是具体的任务
+     * @param taskKey
+     */
+    public void registTask(String taskKey, AbstractPdfTask task) {
+        TASKTABLE.put(taskKey, task);
+        logger.warn("[PdfManageService] ****** TASKLIST size " + TASKTABLE.size() + " REMAINS :" + TASKTABLE.keySet());
     }
 }

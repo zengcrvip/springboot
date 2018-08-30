@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.pdf.service.PdfCreateService;
+import com.sun.javafx.collections.MappingChange;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -61,7 +62,56 @@ public class SpringbootApplicationTests {
 			System.out.println("===========================" + e.getMessage());
 			e.printStackTrace();
 		}
+	}
 
+	@Test
+	public void pdfCreateDetail(){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id","1");
+		map.put("orderId","78268382");
+		map.put("payAcctId","10012215830000574");
+		map.put("name","张真");
+		map.put("bankName","银行名称");
+		map.put("bankAcctId","62228557586755");
+		map.put("bankOpenName","招商银行");
+		map.put("amout","50");
+		map.put("fee","3.50");
+		map.put("createTime",new Date());
+		map.put("endTime",new Date());
+		map.put("dealType","批量付款到银行");
+		map.put("orderNo","201808171819");
+		map.put("errorCode","");
+		map.put("errorMsg","");
+		map.put("orginNo", "201808171819");
+		map.put("memo", "备注");
+		List<Map> list = new ArrayList<Map>();
+		list.add(map);
+		list.add(map);
+		String tempPath = "D:/springboot/tempPath";
+		String basePath = "D:/springboot/basePath";
+		try {
+			pdfCreateService.createBatchDetailVoucher(list, tempPath, basePath, "appCode123456", 0);
+		} catch (Exception e) {
+			System.out.println("===========================" + e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+
+
+
+	@Test
+	public void stringTest(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dateStr = sdf.format(new Date());
+
+		try {
+			SimpleDateFormat e = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date date = e.parse(dateStr + " 23:59:59");
+			System.out.println(date.toString());
+		} catch (ParseException var6) {
+			var6.printStackTrace();
+		}
 	}
 
 
