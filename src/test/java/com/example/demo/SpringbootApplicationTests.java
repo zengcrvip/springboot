@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.epcc.model.EpccPaymentRequestDto;
 import com.example.demo.pdf.service.PdfCreateService;
 import com.sun.javafx.collections.MappingChange;
 import org.junit.Test;
@@ -97,29 +98,4 @@ public class SpringbootApplicationTests {
 		}
 
 	}
-
-
-
-	@Test
-	public void stringTest(){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String dateStr = sdf.format(new Date());
-
-
-
-
-		try {
-			SimpleDateFormat e = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			Date date = e.parse( "2018-06-06 00:00:00");
-			System.out.println(date.toString());
-			int period = (int)((new Date().getTime() - date.getTime())/86400000);
-			System.out.println("period="+period);
-
-		} catch (ParseException var6) {
-			var6.printStackTrace();
-		}
-	}
-
-
-
 }
