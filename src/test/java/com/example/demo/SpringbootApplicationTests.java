@@ -1,17 +1,12 @@
 package com.example.demo;
 
-import com.example.demo.epcc.model.EpccPaymentRequestDto;
 import com.example.demo.pdf.service.PdfCreateService;
-import com.sun.javafx.collections.MappingChange;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RunWith(SpringRunner.class)
