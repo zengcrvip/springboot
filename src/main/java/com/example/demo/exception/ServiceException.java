@@ -1,5 +1,6 @@
 package com.example.demo.exception;
 
+import enums.ErrorEnum;
 import enums.ResponseCode;
 
 /**
@@ -28,6 +29,11 @@ public class ServiceException extends RuntimeException {
         super(responseCode.getCode() + ":" + responseCode.getMsg());
         this.code = responseCode.getCode();
         this.msg = responseCode.getMsg();
+    }
+
+    public ServiceException(ErrorEnum errorEnum) {
+        this.code = errorEnum.getCode();
+        this.msg = errorEnum.getMsg();
     }
 
     public ServiceException(ResponseCode responseCode, Throwable cause) {
