@@ -5,6 +5,7 @@ import com.example.demo.statemachine.MassOutHeadStatusCommand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Author: changrong.zeng
  * @Date: Created in 19:53 2018/9/6 .
  */
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class MassOutHeadStatusTest {
 

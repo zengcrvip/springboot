@@ -1,20 +1,23 @@
 package com.example.demo;
 
 import com.example.demo.pdf.service.PdfCreateService;
+import com.example.demo.pdf.service.impl.PdfCreateServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.StringUtils;
 import java.util.*;
 
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class SpringbootApplicationTests {
 
-	@Autowired
-	private PdfCreateService pdfCreateService;
+	@InjectMocks
+	private PdfCreateServiceImpl pdfCreateService;
 
 	@Test
 	public void contextLoads() {
@@ -50,7 +53,7 @@ public class SpringbootApplicationTests {
 		map.put("ORDERTYPENAME","付款到银行账户");
 		map.put("ORDERTIME",new Date());
 		map.put("MEMO","我是备注");
-		String tempPath = "D:/springboot/tempPath";
+		String tempPath = "/oyo/tempPath";
 		String basePath = "D:/springboot/basePath";
 		try {
 			pdfCreateService.createVoucher(map,tempPath,basePath);

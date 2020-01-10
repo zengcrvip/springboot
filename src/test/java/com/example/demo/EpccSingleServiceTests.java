@@ -1,11 +1,18 @@
 package com.example.demo;
 
+import com.example.demo.epcc.connector.Connector;
 import com.example.demo.epcc.model.EpccPaymentRequestDto;
+import com.example.demo.epcc.service.Decoder;
+import com.example.demo.epcc.service.Encoder;
 import com.example.demo.epcc.service.EpccSingleService;
+import com.example.demo.epcc.service.impl.EpccSingleServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -13,12 +20,21 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @Author: changrong.zeng
  * @Date: Created in 16:01 2018/9/4 .
  */
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class EpccSingleServiceTests {
 
-    @Autowired
-    private EpccSingleService epccSingleService;
+    @InjectMocks
+    private EpccSingleServiceImpl epccSingleService;
+
+    @Mock
+    Encoder encoder;
+
+    @Mock
+    Decoder decoder;
+
+    @Mock
+    private Connector connector;
 
     @Test
     public void EpccSingleServiceTest(){
@@ -48,6 +64,5 @@ public class EpccSingleServiceTests {
         paymentRequestVo.setProductQuantity("1");
         paymentRequestVo.setProductRealQuantity("1");
         epccSingleService.doDebitSingle(paymentRequestVo);
-
     }
 }

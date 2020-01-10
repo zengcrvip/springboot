@@ -8,5 +8,5 @@ import com.example.demo.epcc.model.EpccPaymentRequestDto;
  * @Date: Created in 11:21 2018/9/4 .
  */
 public interface EpccSingleService {
-    public abstract void doDebitSingle(EpccPaymentRequestDto epccpaymentrequestdto);
+    void doDebitSingle(EpccPaymentRequestDto epccpaymentrequestdto);
 }
