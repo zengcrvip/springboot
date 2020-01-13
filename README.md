@@ -30,3 +30,8 @@
 * 自定义参数校验
 > MomalValidateController.special
 
+### junit日志接入
+* jar包引入
+> mockito-all和jacoco-maven-plugin引入，plugin添加，详见pom文件
+> 具体InjectMocks和Mock测试添加，详细见test类文件
+> 编译后具体的测试覆盖文件见target-site-jacoco-index.html
