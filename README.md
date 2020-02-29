@@ -37,5 +37,4 @@
 > 编译后具体的测试覆盖文件见target-site-jacoco-index.html
 
 ### 原创文章
-* 如何设计好接口
-> [如何设计好接口](doc/interface.md)
+> [如何设计好接口](doc/如何设计好接口.md)
