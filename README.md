@@ -36,5 +36,6 @@
 > 具体InjectMocks和Mock测试添加，详细见test类文件
 > 编译后具体的测试覆盖文件见target-site-jacoco-index.html
 
-### 
-> [如何设计好接口](/resources/doc/interface.md)
+### 原创文章
+* 如何设计好接口
+> [如何设计好接口](doc/interface.md)
