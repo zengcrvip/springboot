@@ -1,6 +1,13 @@
 package com.example.demo.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @Author changrong.zeng
  * @Description
@@ -12,13 +19,10 @@ public class Test {
         String s1 = "abc";
         String s2 = "bwc";
 
-        boolean flag = checkPermutation(s1,s2);
-
-        System.out.println("flag=" + flag);
+//        boolean flag = checkPermutation(s1,s2);
 
 
-        int a = 'a';
-        System.out.println("a="+a);
+        System.out.println(8 >>> 2);
     }
 
 
