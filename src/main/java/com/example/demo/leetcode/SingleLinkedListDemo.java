@@ -1,5 +1,8 @@
 package com.example.demo.leetcode;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @Author changrong.zeng
  * @Description 单链表
@@ -210,6 +213,7 @@ class SingleLinkedList{
         }
         HeroNode temp = head;
         boolean flag = false;
+
         while(temp.next != null){
             if(temp.next.no == hNo){
                 flag = true;
@@ -258,6 +262,28 @@ class SingleLinkedList{
             System.out.println(temp.next.toString());
              temp = temp.next;
         }
+    }
+
+
+    public HeroNode removeDuplicateNodes(HeroNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+
+        HeroNode temp = head.next;
+        HeroNode temp_pre = head;
+        Set<Integer> set = new HashSet<Integer>();
+        set.add(head.no);
+        while(temp != null){
+            if(set.contains(temp.no)){
+                temp_pre.next =  temp_pre.next.next;
+            }else{
+                set.add(temp.no);
+            }
+            temp = temp.next;
+            temp_pre = temp_pre.next;
+        }
+        return head;
     }
 
 
