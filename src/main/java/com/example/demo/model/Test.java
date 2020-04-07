@@ -13,43 +13,26 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Description
  * @Date 23:30 2020-03-09
  **/
-public class Test {
+public  class Test {
+
 
     public static void main(String[] args) {
-        String s1 = "abc";
-        String s2 = "bwc";
-
-//        boolean flag = checkPermutation(s1,s2);
-
-
-        System.out.println(8 >>> 2);
+        int[] nums = {5,2,3,1};
+        System.out.println(sortArray(nums));
     }
 
+    public static int[] sortArray(int[] nums) {
 
-
-
-        public static boolean checkPermutation(String s1, String s2) {
-
-            int[] temp = new int[256];
-            for(int i = 0; i < s1.length(); i++){
-                char c = s1.charAt(i);
-                temp[c]++;
-            }
-
-            for(int i = 0; i < s2.length(); i++){
-                char c = s2.charAt(i);
-                if(temp[c] == 0){
-                    return false;
-                }else{
-                    temp[c]--;
+        for(int i=0;i<nums.length;i++){
+            int cur = nums[i];
+            for(int j= i+1; j<nums.length;j++){
+                if(nums[j] < cur){
+                    int temp = nums[j];
+                    nums[j] = nums[i];
+                    nums[i] = temp;
                 }
             }
-
-            return true;
-
         }
-
-
-
-
+        return nums;
+    }
 }
