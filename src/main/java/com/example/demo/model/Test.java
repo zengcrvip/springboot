@@ -1,12 +1,9 @@
 package com.example.demo.model;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.Vector;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author changrong.zeng
@@ -14,25 +11,42 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Date 23:30 2020-03-09
  **/
 public  class Test {
+    private static CyclicBarrier cyclicBarrier = new CyclicBarrier(4);
+    private static volatile int num = 0;
 
 
     public static void main(String[] args) {
-        int[] nums = {5,2,3,1};
-        System.out.println(sortArray(nums));
+
+       for(int j=0;j< 10;j++){
+
+           for(int i=0;i<4;i++){
+               new Thread(() -> {
+                   int value = num*10;
+                   do{
+                       value++;
+                       System.out.println(Thread.currentThread().getName() + ":" + value );
+                   }while(value %10 !=0);
+
+                   try {
+                       cyclicBarrier.await();
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+                   } catch (BrokenBarrierException e) {
+                       e.printStackTrace();
+                   }
+               },"线程"+i).start();
+           }
+           try {
+               Thread.sleep(1000);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           System.out.println("====================================第" + (j+1) + "波次结束！");
+           num++;
+       }
+
+
     }
 
-    public static int[] sortArray(int[] nums) {
 
-        for(int i=0;i<nums.length;i++){
-            int cur = nums[i];
-            for(int j= i+1; j<nums.length;j++){
-                if(nums[j] < cur){
-                    int temp = nums[j];
-                    nums[j] = nums[i];
-                    nums[i] = temp;
-                }
-            }
-        }
-        return nums;
-    }
 }

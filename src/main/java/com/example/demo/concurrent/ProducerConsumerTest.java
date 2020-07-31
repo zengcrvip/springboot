@@ -10,10 +10,10 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @Author changrong.zeng
- * @Description
+ * @Description 生产者消费者模型
  * @Date 23:31 2020-03-31
  **/
-public class Test {
+public class ProducerConsumerTest {
 
     public static void main(String[] args) {
         ShareSource shareSource = new ShareSource(new ArrayBlockingQueue<String>(10));

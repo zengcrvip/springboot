@@ -35,6 +35,7 @@ public class ArrayStack {
 
     }
 
+
     public int peek(){
         if(isEmpty()){
             throw new RuntimeException("stack is empty");

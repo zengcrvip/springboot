@@ -2,6 +2,7 @@ package com.example.demo.leetcode.dfs_bfs;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * @Author changrong.zeng
@@ -36,6 +37,10 @@ public class DFSDemo {
 
         System.out.println("=======后序遍历,stack=============");
         post_sort_stack(node);
+        System.out.println();
+
+        System.out.println("=======后序遍历,stack2=============");
+        post_sort_stack2(node);
         System.out.println();
 
     }
@@ -157,6 +162,12 @@ public class DFSDemo {
     }
 
 
+    /**
+     * DFS 后序遍历
+     * 通过stack实现
+     * 中序遍历：先访问左子树，再访问右子树，最后访问根，总结就是“左右根”；
+     * @param root
+     */
     public static void post_sort_stack(Tree root){
         if(root == null){
             System.out.println("tree is empty");
@@ -165,6 +176,8 @@ public class DFSDemo {
         Deque<Tree> stack = new ArrayDeque<>();
         Tree cur  = root;
         Tree lastVisit = root;
+
+
 
         while(cur != null || !stack.isEmpty()){
             while(cur != null){
@@ -180,6 +193,42 @@ public class DFSDemo {
             }else{
                 cur = cur.right;
             }
+        }
+
+    }
+
+    /**
+     * DFS 后序遍历方法2
+     * 我们已知后序遍历的节点访问顺序为：左 → 右 → 中；
+     * 我们将这个次序颠倒过来：中 → 右 → 左；有没有想到前序遍历的节点访问顺序呢？
+     * 前序遍历是，中 → 左 → 右；因此，我们可以将前序遍历代码中的压栈顺序进行调整，并将结果逆序输出就可以啦！
+     *
+     *
+     * @param root
+     */
+    public static void post_sort_stack2(Tree root){
+        if(root == null){
+            System.out.println("tree is empty");
+        }
+
+        Deque<Tree> stack = new ArrayDeque<>();
+        LinkedList<Integer> list = new LinkedList<Integer>();
+
+        stack.push(root);
+
+        while(!stack.isEmpty()){
+            Tree node = stack.pop();
+            list.addFirst(node.data);
+            if(node.left != null){
+                stack.push(node.left);
+            }
+            if(node.right != null){
+                stack.push(node.right);
+            }
+        }
+
+        while(!list.isEmpty()){
+            System.out.print(list.pop() + " ");
         }
 
     }

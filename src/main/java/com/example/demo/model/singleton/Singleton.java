@@ -7,7 +7,7 @@ package com.example.demo.model.singleton;
  **/
 public class Singleton {
 
-    private static Singleton instance = null;
+    private static volatile Singleton instance = null;
 
     private Singleton(){
 
